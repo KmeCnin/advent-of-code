@@ -35,6 +35,7 @@ foreach ($instructions as $instruction) {
             switch ($parsed['action']) {
                 case 'toggle':
                     $grid[$i][$j]++;
+                    // no break!
                 case 'on':
                     $grid[$i][$j]++;
                     break;
