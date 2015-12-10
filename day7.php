@@ -1,8 +1,7 @@
 <?php
 
-$instructions = explode(PHP_EOL, file_get_contents('inputs/day7'), -1);
-
 // Part one
+$instructions = explode(PHP_EOL, file_get_contents('inputs/day7'), -1);
 $circuit = [];
 execRequired('a', $circuit, $instructions);
 echo 'Part one: '.$circuit['a'];
@@ -10,6 +9,11 @@ echo '
 ';
 
 // Part two
+$instructions = explode(PHP_EOL, file_get_contents('inputs/day7'), -1);
+$circuit = [];
+execInstruction('46065 -> b', $circuit);
+execRequired('a', $circuit, $instructions);
+echo 'Part two: '.$circuit['a'];
 echo '
 ';
 
