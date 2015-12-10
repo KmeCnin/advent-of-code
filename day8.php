@@ -42,9 +42,11 @@ echo '
 // Part two
 $count = 0;
 foreach ($input as $entry) {
-    $characters = str_split($entry);
     $count += 4;
-    foreach ($characters as $key => $c) {
+    $characters = str_split($entry);
+    unset($characters[count($characters)-1]);
+    unset($characters[0]);
+    foreach ($characters as $c) {
         if ('\\' == $c || '"' == $c) {
             $count++;
         }
