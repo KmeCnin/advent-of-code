@@ -2,7 +2,6 @@
 
 $input = explode(PHP_EOL, file_get_contents('inputs/day9'), -1);
 
-// Part one
 $map = [];
 foreach ($input as $data) {
     $exploded = explode(' ', $data);
@@ -13,7 +12,11 @@ $towns = array_keys($map);
 
 findPaths($towns, $map, $paths);
 
-echo 'Part one: '.max($paths);
+echo 'Part one: '.min($paths);
+echo '
+';
+
+echo 'Part two: '.max($paths);
 echo '
 ';
 
