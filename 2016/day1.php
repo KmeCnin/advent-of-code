@@ -1,11 +1,14 @@
 <?php
 
 $day1 = file_get_contents('inputs/day1');
+$day1 = 'R8, R4, R4, R8';
 $input = explode(', ', $day1);
 
 //           X  Y
 $position = [0, 0];
 $facing = 0;
+$visited = [];
+$twice = null;
 foreach ($input as $instruction) {
     $turn = substr($instruction, 0, 1);
     $step = substr($instruction, 1);
@@ -17,23 +20,31 @@ foreach ($input as $instruction) {
             $facing !== 3 ? $facing++ : $facing = 0;
             break;
     }
-    switch ($facing) {
-        case 0:
-            $position[0] += $step;
-            break;
-        case 1:
-            $position[1] += $step;
-            break;
-        case 2:
-            $position[0] -= $step;
-            break;
-        case 3:
-            $position[1] -= $step;
-            break;
+    for($i=0; $i<$step; $i++) {
+        switch ($facing) {
+            case 0:
+                $position[0]++;
+                break;
+            case 1:
+                $position[1]++;
+                break;
+            case 2:
+                $position[0]--;
+                break;
+            case 3:
+                $position[1]--;
+                break;
+        }
+        if (isset($visited[$position[0]]) && 
+            $visited[$position[0]] === $position[1] &&
+            null === $twice
+        ) {
+            $twice = array_sum(array_map('abs', $position));
+        } elseif (null === $twice) {
+            $visited[$position[0]] = $position[1];
+        }
     }
 }
 
-echo "Part1: ";
-echo array_sum(array_map('abs', $position));
-
-echo "\n";
+echo "Part1: ".array_sum(array_map('abs', $position))."\n";
+echo "Part2: ".$twice."\n";
