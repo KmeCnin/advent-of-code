@@ -31,7 +31,6 @@ $triangles = array_map(function ($triangle) {
 	return new Triangle(preg_split('/\s+/', $triangle));
 }, $triangles);
 
-
 echo "Part1: ".countTrueTriangles($triangles)."\n";
 echo "Part2: ".countTrueTriangles($arrangedTriangles)."\n";
 
