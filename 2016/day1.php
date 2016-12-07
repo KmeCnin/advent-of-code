@@ -13,10 +13,10 @@ foreach ($input as $instruction) {
     $step = substr($instruction, 1);
     switch ($turn) {
         case 'L':
-            $facing !== 0 ? $facing-- : $facing = 3;
+            $facing = ($facing-1)%3
             break;
         case 'R':
-            $facing !== 3 ? $facing++ : $facing = 0;
+            $facing = ($facing+1)%3
             break;
     }
     for($i=0; $i<$step; $i++) {
