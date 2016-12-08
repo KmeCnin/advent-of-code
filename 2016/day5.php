@@ -1,8 +1,8 @@
 <?php
 
 $input = 'reyedfim';
-$input = 'ffykfhsq';
-$input = 'abc';
+// $input = 'ffykfhsq';
+// $input = 'abc';
 
 $index = 0;
 $password = '';
