@@ -10,8 +10,4 @@ module Main where
     strToInt string = read string :: Integer
 
     main = do input <- readFile "input"
-              let listStr = splitOn "\n" input
-              let listClean = map cleanStrInt listStr
-              let listInt = map strToInt listClean
-              let frequency = foldl (+) 0 listInt
-              print frequency
+              print $ foldl (+) 0 $ map strToInt $ map cleanStrInt $ splitOn "\n" input
