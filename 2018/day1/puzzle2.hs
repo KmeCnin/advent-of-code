@@ -1,28 +1,25 @@
+{-# OPTIONS -Wall #-}
+import Data.Set (Set)
+import qualified Data.Set as Set
+
 castInt :: [Char] -> Int
 castInt ('+':string) = castInt string
 castInt string = read string
 
-lastDefault :: [t] -> t -> t
-lastDefault [] def = def
-lastDefault list def = last list
+iterateMods :: String -> [Int]
+iterateMods = cycle . map castInt . lines
 
-push :: [t] -> t -> [t]
-push [] element = [element]
-push list element = list ++ [element]
+iterateFrequencies :: [Int] -> [Int]
+iterateFrequencies = scanl (+) 0
 
-firstDuplicate :: [Int] -> [Int] -> Int
-firstDuplicate acc list = do
-    let last = lastDefault acc 0
-    let i = length acc
-    let toAdd = list !! i
-    let new = last + toAdd
-
-    if elem new acc
+firstDuplicate :: Set Int -> [Int]  -> Int
+firstDuplicate s freqs =
+    if Set.member new s
     then new
-    else firstDuplicate $ list push acc new
+    else firstDuplicate (Set.insert new s) remaining
+    where
+        new = head freqs
+        remaining = tail freqs
 
-main = do
-    input <- readFile "input"
-    let list = map castInt $ lines input
-    let first = firstDuplicate [] list
-    print first
+main :: IO ()
+main = readFile "input" >>= print . firstDuplicate Set.empty . iterateFrequencies . iterateMods
