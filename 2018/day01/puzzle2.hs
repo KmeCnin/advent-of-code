@@ -21,4 +21,4 @@ firstDuplicate = go Set.empty
             else go (Set.insert new s) remaining
     
 main :: IO ()
-main = readFile "input" >>= print . firstDuplicate . iterateFrequencies . iterateMods
+main = print . firstDuplicate . iterateFrequencies . iterateMods =<< readFile "input"
