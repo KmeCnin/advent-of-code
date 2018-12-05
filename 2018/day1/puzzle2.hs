@@ -13,13 +13,10 @@ iterateFrequencies :: [Int] -> [Int]
 iterateFrequencies = scanl (+) 0
 
 firstDuplicate :: Set Int -> [Int]  -> Int
-firstDuplicate s freqs =
+firstDuplicate s (new:remaining) =
     if Set.member new s
     then new
     else firstDuplicate (Set.insert new s) remaining
-    where
-        new = head freqs
-        remaining = tail freqs
 
 main :: IO ()
 main = readFile "input" >>= print . firstDuplicate Set.empty . iterateFrequencies . iterateMods
