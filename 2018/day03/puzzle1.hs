@@ -8,17 +8,7 @@ export :: (String, String, String, [String]) -> (Int, Int, Int, Int)
 export (_, _, _, [a, b, c, d]) = (read a, read b, read c, read d)
 
 cover :: (Int, Int, Int, Int) -> [(Int, Int)]
-cover (left, top, width, height) = walk [] left top width height 0 0
-    where
-        walk :: [(Int, Int)] -> Int -> Int -> Int -> Int -> Int -> Int -> [(Int, Int)]
-        walk list left top width height x y 
-            | nextX < width = walk (list ++ tuple) left top width height nextX y
-            | nextY < height = walk (list ++ tuple) left top width height 0 nextY
-            | otherwise = (list ++ tuple)
-            where
-                nextX = x + 1
-                nextY = y + 1
-                tuple = [(left + x, top + y)]
+cover (left, top, width, height) = [(x, y) | x <- [left..left+width-1], y <- [top..top+height-1]]
 
 main :: IO ()
 main = print . length . filter (> 1) . map length . group . sort . concat . map cover . map export . map parse . lines =<< readFile "input"
